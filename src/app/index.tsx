@@ -7,7 +7,7 @@ import { UserList } from "@/src/components/User/UserList";
 
 export default function Index() {
   return (
-    <SafeAreaProvider className="pt-16 bg-slate-50">
+    <SafeAreaProvider className="pt-16 bg-white">
       <StatusBar style="dark" />
       <View className="flex-1 items-center px-5">
         <Text className="font-bold text-2xl">InnovateTech</Text>

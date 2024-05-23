@@ -8,7 +8,7 @@ export function UserCard({ user }: UserCardProps) {
   return (
     <TouchableOpacity
       onPress={showUserInfo}
-      className="w-full h-28 border border-slate-400 px-4 py-2"
+      className="w-[340px] h-28 border border-slate-400 px-4 py-2"
     >
       <View className="flex-row h-full justify-between">
         <View className="h-full justify-center">
@@ -16,15 +16,15 @@ export function UserCard({ user }: UserCardProps) {
             size={80}
             rounded
             source={{
-              uri: "https://randomuser.me/api/portraits/women/57.jpg",
+              uri: user.photo,
             }}
           />
         </View>
-        <View className="h-full justify-between pb-5">
-          <Text className="font-bold text-xl">Ms Alea Christoffersen</Text>
-          <View className="flex-row pr  justify-between">
-            <Text className="text-lg">Female</Text>
-            <Text className="text-lg">01/01/1990</Text>
+        <View className="h-full justify-between pb-5 pt-1">
+          <Text className="font-bold text-lg">{user.name}</Text>
+          <View className="flex-row justify-between">
+            <Text className="text-md">{user.gender}</Text>
+            <Text className="text-md">{user.birthDate}</Text>
           </View>
         </View>
       </View>

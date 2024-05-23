@@ -1,24 +1,32 @@
 import { ActivityIndicator, FlatList, View, Text } from "react-native";
 import { UserCard } from "./UserCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchUsers } from "@/src/api/api";
 
 export function UserList() {
-  const [userData, setUserData] = useState([
-    { user: { name: "John", sex: "male", birthDate: "01/01/1990" } },
-  ]);
+  const [userData, setUserData] = useState<UserType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstPageReceived, setIsFirstPageReceived] = useState(false);
 
-  const renderItem = ({ item }: any) => <UserCard user={item} />;
+  const renderItem = ({ item }: FlatListProps) => <UserCard user={item} />;
 
   async function fetchNextPage() {}
+
+  async function loadUsers() {
+    const userFetched = await fetchUsers();
+    setUserData(userFetched);
+  }
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
   const ListEndLoader = () => {
     if (!isFirstPageReceived && isLoading) {
       return (
         <View>
           <ActivityIndicator size={"large"} color={"black"} />
-          <Text style={{ marginTop: 15 }}>CARREGANDO MAIS</Text>
+          <Text className="mt-3">CARREGANDO MAIS</Text>
         </View>
       );
     }
@@ -30,6 +38,7 @@ export function UserList() {
       renderItem={renderItem}
       onEndReached={fetchNextPage}
       onEndReachedThreshold={0.8}
+      contentContainerStyle={{ gap: 15 }}
       ListFooterComponent={ListEndLoader} // Loader when loading next page.
     />
   );

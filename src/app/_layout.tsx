@@ -1,4 +1,4 @@
-import { GeneralContextProvider } from "@/context/AppContext";
+import { GeneralContextProvider } from "@/src/context/AppContext";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {

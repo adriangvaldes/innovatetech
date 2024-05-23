@@ -24,8 +24,6 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
   const [userInfoShow, setUserInfoShow] = useState(false);
 
   function showUserInfo() {
-    console.log("IM HERE");
-
     setUserInfoShow(true);
   }
 

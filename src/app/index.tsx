@@ -9,7 +9,7 @@ export default function Index() {
   return (
     <SafeAreaProvider className="pt-16 bg-white">
       <StatusBar style="dark" />
-      <View className="flex-1 items-center px-5">
+      <View className="flex-1 items-center px-5 pb-12">
         <Text className="font-bold text-2xl">InnovateTech</Text>
         <View className="w-full h-32 flex-row items-center justify-center">
           <Input

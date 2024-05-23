@@ -3,7 +3,6 @@ import { BottomSheet, Button } from "@rneui/base";
 import { View } from "react-native";
 export function UserInfo() {
   const { closeUserInfo, userInfoShow } = useGeneralContext();
-  console.log(userInfoShow);
 
   return (
     <BottomSheet modalProps={{}} isVisible={userInfoShow}>

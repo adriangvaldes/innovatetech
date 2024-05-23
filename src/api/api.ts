@@ -9,27 +9,9 @@ const api = axios.create({
 
 export { api };
 
-export async function fetchUsers() {
+export async function fetchUsers(page = 1) {
   try {
-    const data = await api.get("/?nat=br&results=20");
-    const usersFetched: UserFetchedType[] = data.data.results;
-    return usersFetched.map(
-      (user) =>
-        ({
-          name: `${user.name.title} ${user.name.first} ${user.name.last}`,
-          gender: user.gender,
-          birthDate: formatDate(user.dob.date),
-          photo: user.picture.medium,
-        } as UserType)
-    );
-  } catch (err: any | AxiosError) {
-    throw new Error(err);
-  }
-}
-
-export async function fetchNextPage() {
-  try {
-    const data = await api.get(`/?page=${"2"}&nat=br&results=20`);
+    const data = await api.get(`/?page=${page}&nat=br&results=10&seed=abc`);
     const usersFetched: UserFetchedType[] = data.data.results;
     return usersFetched.map(
       (user) =>

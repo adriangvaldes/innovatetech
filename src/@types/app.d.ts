@@ -11,7 +11,7 @@ interface FlatListProps {
 interface UserType {
   photo: string;
   name: string;
-  gender: string;
+  gender: Gender;
   email: string;
   birthDate: string;
   phone: string;
@@ -34,6 +34,8 @@ interface UserFetchedType {
   nat: string;
   id: UserId;
 }
+
+type Gender = "female" | "male";
 
 interface UserId {
   name: string;
@@ -69,3 +71,9 @@ interface Street {
   number: number;
   name: string;
 }
+
+type CardProviderProps = {
+  children: ReactNode;
+};
+
+type GenderSearch = "male" | "female";

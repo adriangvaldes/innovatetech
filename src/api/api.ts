@@ -9,9 +9,12 @@ const api = axios.create({
 
 export { api };
 
-export async function fetchUsers(page = 1) {
+export async function fetchUsers(page = 1, gender?: Gender) {
   try {
-    const data = await api.get(`/?page=${page}&nat=br&results=10&seed=abc`);
+    const data = await api.get(
+      `/?page=${page}&nat=br&results=20&${gender ? `gender=${gender}` : ""}`
+    );
+
     const usersFetched: UserFetchedType[] = data.data.results;
     return usersFetched.map(
       (user) =>

@@ -3,7 +3,7 @@ import { UserCard } from "./UserCard";
 import { useGeneralContext } from "@/src/context/AppContext";
 
 export function UserList() {
-  const { userData, nextPage, userFetchLoading } = useGeneralContext();
+  const { userSearched, nextPage, userFetchLoading } = useGeneralContext();
 
   const renderItem = ({ item }: FlatListProps) => <UserCard user={item} />;
 
@@ -20,10 +20,10 @@ export function UserList() {
 
   return (
     <FlatList
-      data={userData}
+      data={userSearched}
       renderItem={renderItem}
       onEndReached={nextPage}
-      onEndReachedThreshold={0.5}
+      onEndReachedThreshold={0.8}
       contentContainerStyle={{ gap: 10 }}
       ListFooterComponent={ListEndLoader} // Loader when loading next page.
       style={{ width: 350 }}

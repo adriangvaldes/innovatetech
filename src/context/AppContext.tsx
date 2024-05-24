@@ -12,17 +12,20 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 type GeneralContextProps = {
   userFetchLoading: boolean;
+  filterModalShow: boolean;
+  filterApplied: boolean;
   userInfoShow: boolean;
   userData: UserType[];
+  userSearched: UserType[];
   userSelected: UserType | null;
   bottomSheetRef: RefObject<BottomSheetModal>;
   showUserInfo: (user: UserType) => void;
+  handleGenderToSearch: (genders?: GenderSearch) => void;
   closeUserInfo: () => void;
   nextPage: () => void;
-};
-
-type CardProviderProps = {
-  children: ReactNode;
+  searchUser: (search: string) => void;
+  openFilterModal: () => void;
+  closeFilterModal: () => void;
 };
 
 export const GeneralContext = createContext({} as GeneralContextProps);
@@ -33,9 +36,13 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
   const [userInfoShow, setUserInfoShow] = useState(false);
   const [page, setPage] = useState(1);
   const [userData, setUserData] = useState<UserType[]>([]);
+  const [userSearched, setUserSearched] = useState<UserType[]>([]);
   const [userFetchLoading, setUserFetchLoading] = useState(false);
+  const [filterApplied, setFilterApplied] = useState(false);
+  const [filterModalShow, setFilterModalShow] = useState(false);
   const [userSelected, setUserSelected] = useState<UserType | null>(null);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const [search, setSearch] = useState("");
 
   function showUserInfo(user: UserType) {
     if (!bottomSheetRef) return;
@@ -49,15 +56,46 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
     setUserInfoShow(false);
   }
 
-  function nextPage() {
-    setPage((prev) => prev + 1);
+  function closeFilterModal() {
+    setFilterModalShow(false);
   }
 
-  async function loadUsers() {
+  function openFilterModal() {
+    setFilterModalShow(true);
+  }
+
+  async function nextPage() {
+    setPage((prev) => prev + 1);
+    await loadUsers();
+  }
+
+  function handleGenderToSearch(gender?: GenderSearch) {
+    loadUsers(gender, "genderSearch");
+    setFilterApplied(!!gender);
+  }
+
+  function handleSearch() {
+    setUserSearched(
+      userData.filter((user) =>
+        user.name.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }
+
+  function searchUser(searchToFind: string) {
+    setSearch(searchToFind);
+  }
+
+  async function loadUsers(gender?: Gender, genderSearch?: "genderSearch") {
+    if (search) return;
     setUserFetchLoading(true);
     try {
-      const userFetched = await fetchUsers(page);
-      setUserData((prev) => [...prev, ...userFetched]);
+      const userFetched = await fetchUsers(page, gender);
+
+      setUserData((prev) => {
+        const previousData = genderSearch ? [] : [...prev];
+        return [...previousData, ...userFetched];
+      });
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +104,16 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
 
   useEffect(() => {
     loadUsers();
-  }, [page]);
+  }, []);
+
+  useEffect(() => {
+    handleSearch();
+  }, [search]);
+
+  useEffect(() => {
+    if (userData.length === 0) return;
+    setUserSearched(userData.map((el) => el));
+  }, [userData]);
 
   return (
     <GeneralContext.Provider
@@ -79,6 +126,13 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
         userFetchLoading,
         userSelected,
         bottomSheetRef,
+        searchUser,
+        userSearched,
+        openFilterModal,
+        closeFilterModal,
+        filterModalShow,
+        handleGenderToSearch,
+        filterApplied,
       }}
     >
       {children}

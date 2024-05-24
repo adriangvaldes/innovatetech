@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from "react-native";
-import { Button, ButtonGroup, CheckBox, Icon, Overlay } from "@rneui/themed";
+import { Button, ButtonGroup, Overlay } from "@rneui/themed";
 import { useGeneralContext } from "@/src/context/AppContext";
 import { useState } from "react";
 

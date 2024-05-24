@@ -1,24 +1,35 @@
-# Welcome to your Expo app 👋
+# Bem vindo ao projeto Innovatech! 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este é um app desenvolvido para o desafio do processo seletivo da C2S (Contact2Sale). Um app simples de listagem de usuários e visualização de detalhes dos mesmos. Com funcionalidades básicas de busca por nome e filtragem por gênero.
 
-## Get started
+O projeto foi feito em React Native, utilizando typescript com estilizações hibrida usando [Nativewind](https://www.nativewind.dev/) (Tailwind para o React Native) e em alguns casos a o próprio `StyleSheet` nativo do Native.
 
-1. Install dependencies
+Foi utilizado a biblioteca [Gorhom](https://ui.gorhom.dev/components/bottom-sheet/) `@gorhom/bottom-sheet"` para o componente de BottomSheet para agilizar a implementação. Alem da biblioteca de componentes da [React Native Elements](https://reactnativeelements.com/)
 
-   ```bash
+## Rodando o projeto
+
+Este é um projeto desenvolvido em Expo, para roda-lo não é muito diferente do que um app feito Nativamente com React Native. O processo é simples:
+
+1. Instalar as dependências
+
+```bash
    npm install
-   ```
+```
 
-2. Start the app
+caso utilize o `yarn`
 
-   ```bash
-    npx expo start
-   ```
+```bash
+   yarn install
+```
 
-In the output, you'll find options to open the app in a
+2. Inicie o projeto
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+```bash
+npx expo start
+```
+
+3. No terminal vemos um QR code. Que utilizaremos no aplicativo do Expo Go. Para instalar no seu celular basta ir na loja de aplicativos do celular (Playstore ou Applestore) e procurar e baixar "Expo Go".
+
+4. Dentro do app temos a opção "Ler QR Code", tocando nela a camera é aberta, então é so apontar para o QR Code do terminal
+
+5. Pronto! Seu app ja está rodando =D

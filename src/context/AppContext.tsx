@@ -3,7 +3,6 @@ import React, {
   useState,
   useContext,
   useEffect,
-  ReactNode,
   useRef,
   RefObject,
 } from "react";
@@ -96,8 +95,8 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
         const previousData = genderSearch ? [] : [...prev];
         return [...previousData, ...userFetched];
       });
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.error(error);
     }
     setUserFetchLoading(false);
   }
@@ -143,5 +142,6 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
 export default GeneralContext;
 
 export const useGeneralContext = () => {
+  // Criando um hook para facilitar a importação do contexto e melhorar sua verbosidade
   return useContext(GeneralContext);
 };

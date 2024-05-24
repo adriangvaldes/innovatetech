@@ -11,7 +11,7 @@ import { FilterModal } from "../components/FIlterModal";
 export default function Index() {
   const { searchUser, openFilterModal, filterApplied } = useGeneralContext();
   return (
-    <SafeAreaProvider className="pt-16 bg-gray-200">
+    <SafeAreaProvider className="pt-16 bg-gray-100">
       <StatusBar style="dark" />
       <BottomSheetModalProvider>
         <View className="items-center px-5 pb-0 flex-1">

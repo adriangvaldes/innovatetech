@@ -1,11 +1,7 @@
 import { useGeneralContext } from "@/src/context/AppContext";
-import { Button, Avatar } from "@rneui/themed";
+import { Avatar } from "@rneui/themed";
 import { View, Text, Dimensions } from "react-native";
-import BottomSheet, {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-  BottomSheetView,
-} from "@gorhom/bottom-sheet";
+import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import { useMemo } from "react";
 
 export function UserInfo() {

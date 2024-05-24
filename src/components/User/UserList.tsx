@@ -10,7 +10,7 @@ export function UserList() {
   const ListEndLoader = () => {
     if (userFetchLoading) {
       return (
-        <View className="mt-10">
+        <View className="mt-10 mb-20">
           <ActivityIndicator size={"large"} color={"black"} />
           <Text className="mt-3 text-center">CARREGANDO MAIS</Text>
         </View>

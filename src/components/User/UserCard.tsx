@@ -7,8 +7,8 @@ export function UserCard({ user }: UserCardProps) {
 
   return (
     <TouchableOpacity
-      onPress={showUserInfo}
-      className="w-[340px] h-28 border border-slate-400 px-4 py-2"
+      onPress={() => showUserInfo(user)}
+      className="h-28 w-[350px] border border-slate-400 px-4 py-2"
     >
       <View className="flex-row h-full justify-between">
         <View className="h-full justify-center">
@@ -20,10 +20,10 @@ export function UserCard({ user }: UserCardProps) {
             }}
           />
         </View>
-        <View className="h-full justify-between pb-5 pt-1">
+        <View className="h-[95px] w-[220px] justify-between pb-5 pt-1">
           <Text className="font-bold text-lg">{user.name}</Text>
-          <View className="flex-row justify-between">
-            <Text className="text-md">{user.gender}</Text>
+          <View className="flex-row items-center justify-between">
+            <Text className="text-md capitalize">{user.gender}</Text>
             <Text className="text-md">{user.birthDate}</Text>
           </View>
         </View>

@@ -16,10 +16,16 @@ export async function fetchUsers(page = 1) {
     return usersFetched.map(
       (user) =>
         ({
+          photo: user.picture.large,
           name: `${user.name.title} ${user.name.first} ${user.name.last}`,
+          email: user.email,
           gender: user.gender,
           birthDate: formatDate(user.dob.date),
-          photo: user.picture.medium,
+          phone: user.phone,
+          nationality: user.nat,
+          address: user.location,
+          identification: user.id,
+          id: user.id.value,
         } as UserType)
     );
   } catch (err: any | AxiosError) {

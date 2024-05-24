@@ -9,23 +9,63 @@ interface FlatListProps {
 }
 
 interface UserType {
+  photo: string;
   name: string;
   gender: string;
+  email: string;
   birthDate: string;
-  photo: string;
+  phone: string;
+  nationality: string;
+  address: Location;
+  identification: UserId;
+  id: string;
 }
 
 interface UserFetchedType {
-  name: {
-    title: string;
-    first: string;
-    last: string;
-  };
-  dob: { date: string };
   gender: string;
-  picture: {
-    large: string;
-    medium: string;
-    thumbnail: string;
-  };
+  name: Name;
+  location: Location;
+  email: string;
+  dob: Dob;
+  registered: Dob;
+  phone: string;
+  cell: string;
+  picture: Picture;
+  nat: string;
+  id: UserId;
+}
+
+interface UserId {
+  name: string;
+  value: string;
+}
+
+interface Picture {
+  large: string;
+  medium: string;
+  thumbnail: string;
+}
+
+interface Dob {
+  date: string;
+  age: number;
+}
+
+interface Location {
+  street: Street;
+  city: string;
+  state: string;
+  country: string;
+  postcode: string;
+}
+
+interface Name {
+  title: string;
+  first: string;
+  last: string;
+}
+
+interface Street {
+  number: number;
+  name: string;
 }

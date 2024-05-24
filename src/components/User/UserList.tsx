@@ -8,7 +8,7 @@ export function UserList() {
   const renderItem = ({ item }: FlatListProps) => <UserCard user={item} />;
 
   const ListEndLoader = () => {
-    if (true) {
+    if (userFetchLoading) {
       return (
         <View className="mt-10">
           <ActivityIndicator size={"large"} color={"black"} />
@@ -22,10 +22,11 @@ export function UserList() {
     <FlatList
       data={userData}
       renderItem={renderItem}
-      // onEndReached={nextPage}
-      onEndReachedThreshold={0.8}
-      contentContainerStyle={{ gap: 15 }}
+      onEndReached={nextPage}
+      onEndReachedThreshold={0.5}
+      contentContainerStyle={{ gap: 10 }}
       ListFooterComponent={ListEndLoader} // Loader when loading next page.
+      style={{ width: 350 }}
     />
   );
 }

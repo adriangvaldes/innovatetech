@@ -4,14 +4,19 @@ import React, {
   useContext,
   useEffect,
   ReactNode,
+  useRef,
+  RefObject,
 } from "react";
 import { fetchUsers } from "../api/api";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 type GeneralContextProps = {
   userFetchLoading: boolean;
   userInfoShow: boolean;
   userData: UserType[];
-  showUserInfo: () => void;
+  userSelected: UserType | null;
+  bottomSheetRef: RefObject<BottomSheetModal>;
+  showUserInfo: (user: UserType) => void;
   closeUserInfo: () => void;
   nextPage: () => void;
 };
@@ -29,12 +34,18 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
   const [page, setPage] = useState(1);
   const [userData, setUserData] = useState<UserType[]>([]);
   const [userFetchLoading, setUserFetchLoading] = useState(false);
+  const [userSelected, setUserSelected] = useState<UserType | null>(null);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
 
-  function showUserInfo() {
+  function showUserInfo(user: UserType) {
+    if (!bottomSheetRef) return;
+    setUserSelected(user);
     setUserInfoShow(true);
+    bottomSheetRef.current?.present();
   }
 
   function closeUserInfo() {
+    setUserSelected(null);
     setUserInfoShow(false);
   }
 
@@ -66,6 +77,8 @@ export const GeneralContextProvider: React.FC<CardProviderProps> = ({
         userData,
         nextPage,
         userFetchLoading,
+        userSelected,
+        bottomSheetRef,
       }}
     >
       {children}
